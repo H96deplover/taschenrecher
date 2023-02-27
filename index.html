@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="de">
+<style>
+ body {
+   font-family: normal;
+   background-color: #262626;
+ }
+ .sch {
+   color: white;
+   font-size: 30px;
+   display: flex;
+   justify-content: center;
+   margin: 20px;
+   border: 2px solid grey;
+   height: 50px;
+ }
+ p {
+   color: white;
+   font-size: 30px;
+   display: flex;
+   justify-content: center;
+ }
+ .button {
+   display: flex;
+   justify-content: center;
+   background-color: yellow;
+   height: 50px;
+   font-size: 30px;
+   margin-left: 540px;
+ }
+ select {
+   height: 50px;
+   font-size: 30px;
+   display:flex;
+   justify-content: center;
+   margin-left: 280px;
+ }
+ .divi {
+   color: white;
+   font-size: 30px;
+   display: flex;
+   justify-content: center;
+   border: 2px solid grey;
+   margin: 20px;
+ }
+ .h {
+   display: flex;
+   justify-content: center;
+ }
+ .inputoi {
+   margin: 10px;
+ }
+ .kilo {
+   color: white;
+   font-size: 30px;
+ }
+ .buttoni {
+   margin: 10px;
+   background-color: yellow;
+   height: 50px;
+   font-size: 30px;
+   margin-top: 1px;
+   margin-left: 50px;
+   margin-right: 50px;
+ }
+ .inputi {
+   height: 30px;
+   font-size: 20px;
+ }
+</style>
+<head>
+  <body>
+  <title>Schiedsrichter-Geldrechner</title>
+  <link rel="manifest" href="manifest.json">
+</head>
+<div class="sch">
+   Hannover-Schiedsrichter-Geldrechner
+</div>
+<p>Suchen sie eine Liga aus:</p>
+<select id="liga">
+  <option value="none">Bitte eingeben</option>
+  <option value="senioren">Senioren U40/U50 in jeder Liga</option>
+  <option value="alt">Altherren in jeder Liga</option>
+  <option value="kl">Herren Kreisliga</option>
+  <option value="olvl">Herren Oberliga/Verbandsliga</option>
+  <option value="ll">Herren Landesliga</option>
+  <option value="bl">Herren Bezirksliga</option>
+  <option value="kk">Herren Kreisklasse</option>
+  <option value="fo">Frauen Oberliga</option>
+  <option value="fl">Frauen Landesliga</option>
+  <option value="fb">Frauen Bezirksliga</option>
+  <option value="fk">Frauen Kreisliga</option>
+  <option value="ajbl">A-Jugend Bezirksliga/Landesliga/Niedersachsenliga</option>
+  <option value="ajkl">A-Jugend Kreisliga/Kreisklasse</option>
+  <option value="bjbl">B-Jugend Bezirksliga/Landesliga/Niedersachsenliga</option>
+  <option value="bjkl">B-Jugend Kreisliga/Kreisklasse</option>
+  <option value="cjbl">C-Jugend Bezirksliga/Landesliga</option>
+  <option value="cjkl">C-Jugend Kreisliga/Kreisklasse</option>
+  <option value="djg">Jugend D-G in jeder Liga</option>
+</select>
+<br><br>
+<button class="button" onclick="berechnen()">Berechnen</button>
+<br><br>
+<p>Schiedsrichter: <span id="sr"></span></p>
+<p>Schiedsrichter-Assistent: <span id="sa"></span></p>
+<div class="divi">
+  Fahrkosten
+</div>
+<div class="h">
+  		<label class="kilo" for="km">Kilometer:</label>
+		<input class="inputi" type="number" id="km" name="km" min="0"><br><br>
+		<button class="buttoni" type="button" onclick="calculate()">Berechnen</button><br><br>
+		<label class="kilo"for="result">Ergebnis:</label>
+		<input class="inputi" type="text" id="result" name="result" readonly>
+</div>
+<script>
+  function berechnen() {
+  var liga = document.getElementById("liga").value;
+  var sr = 0;
+  var sa = 0;
+  
+  switch (liga) {
+    case "kl":
+      sr = 25;
+      sa = 20;
+      break;
+      case "alt":
+      sr = 22;
+      sa = 18;
+      case "senioren":
+      sr = 16;
+      sa = 0;
+      break;
+      case "fo":
+      sr = 40;
+      sa = 25;
+      break;
+      case "fk":
+      sr = 22;
+      sa = 18;
+      break;
+      case "fb":
+      sr = 23;
+      sa = 18;
+      break;
+      case "fl":
+      sr = 26;
+      sa = 18;
+      break;
+    case "olvl":
+      sr = 60;
+      sa = 30;
+      break;
+    case "ll":
+      sr = 40;
+      sa = 23;
+      break;
+    case "bl":
+      sr = 35;
+      sa = 22;
+      break;
+    case "kk":
+      sr = 22;
+      sa = 18;
+      break;
+    case "ajbl":
+      sr = 20;
+      sa = 15;
+      break;
+    case "ajkl":
+      sr = 18;
+      sa = 15;
+      break;
+    case "bjbl":
+      sr = 19;
+      sa = 15;
+      break;
+    case "bjkl":
+      sr = 17;
+      sa = 15;
+      break;
+    case "cjbl":
+      sr = 18;
+      sa = 15;
+      break;
+    case "cjkl":
+      sr = 16;
+      sa = 15;
+      break;
+    case "djg":
+      sr = 15;
+      sa = 0;
+      break;
+    default:
+      break;
+  }
+  
+  document.getElementById("sr").innerHTML = sr + "-euro";
+  document.getElementById("sa").innerHTML = sa + "-euro";
+}
+function calculate() {
+			var km = parseFloat(document.getElementById("km").value);
+			var cost = km * 0.30;
+			document.getElementById("result").value = cost.toFixed(2) + "-euro";
+		}
+</script>
+</body>
+</html>
